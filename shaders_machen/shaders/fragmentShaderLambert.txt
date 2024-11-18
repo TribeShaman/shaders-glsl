@@ -1,0 +1,36 @@
+#version 330 core
+
+struct PointLight {
+    vec3 position;       // Pozycja światła
+    vec3 color;          // Kolor światła
+    float constant;      // Współczynnik stały spadku
+    float linear;        // Współczynnik liniowy spadku
+    float quadratic;     // Współczynnik kwadratowy spadku
+};
+
+
+in vec3 FragPos;     // Pozycja fragmentu
+in vec3 Normal;      // Normalna fragmentu
+in vec2 TexCoord;    // Współrzędne tekstury
+
+
+out vec4 FragColor;  // Dane wyjściowe - kolor fragmentu (piksela)
+
+uniform PointLight light; // Światło jako struktura
+uniform sampler2D ourTexture; // Tekstura
+void main() {
+    // Kierunek światła
+    vec3 lightDir = normalize(light.position - FragPos);
+    
+    // Model Lamberta: maksymalizacja kropkowego iloczynu wektorów
+    float lambertian = max(dot(Normal, lightDir), 0.0);
+    
+    // Finalny kolor dyfuzyjny
+    vec3 diffuse = light.color * lambertian;
+
+    // Kolor tekstury
+    vec4 textureColor = texture(ourTexture, TexCoord);
+
+    // Multiplikatywne teksturowanie
+    FragColor = vec4(diffuse, 1.0) * textureColor;
+}

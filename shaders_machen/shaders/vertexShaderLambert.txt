@@ -1,0 +1,21 @@
+#version 330 core // Wersja GLSL
+
+layout (location = 0) in vec3 aPos;      // Pozycja wierzchołka
+layout (location = 2) in vec3 aNormal;   // Normalna wierzchołka
+layout (location = 3) in vec2 aTexCoord; // Współrzędne tekstury
+
+
+out vec3 FragPos;        // Pozycja fragmentu
+out vec3 Normal;        // Normalna fragmentu
+out vec2 TexCoord;       // Współrzędne tekstury
+
+uniform mat4 model; // Macierz modelu
+uniform mat4 view;  // Macierz widoku
+uniform mat4 projection; // Macierz projekcji
+
+void main() {
+    gl_Position = projection * view * model * vec4(aPos, 1.0);
+    FragPos = vec3(model * vec4(aPos, 1.0));
+    Normal = mat3(transpose(inverse(model))) * aNormal; // Transformacja normalnych
+    TexCoord = aTexCoord; // Przekazanie współrzędnych tekstury
+}

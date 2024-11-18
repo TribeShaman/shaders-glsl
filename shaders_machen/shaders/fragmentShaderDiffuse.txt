@@ -1,0 +1,43 @@
+#version 330 core
+
+struct PointLight {
+    vec3 position;       // Pozycja światła
+    vec3 color;          // Kolor światła
+    float constant;      // Współczynnik stały spadku
+    float linear;        // Współczynnik liniowy spadku
+    float quadratic;     // Współczynnik kwadratowy spadku
+};
+
+in vec3 vertexColor; // Dane wejściowe z vertex shadera
+in vec3 FragPos;
+in vec3 Normal;
+
+out vec4 FragColor;  // Dane wyjściowe - kolor fragmentu (piksela)
+
+uniform PointLight light; // Światło jako struktura
+uniform vec4 overrideColor;
+
+void main() {
+    vec3 norm = normalize(Normal); // Normalizacja normalnych
+    vec3 lightDir = normalize(light.position - FragPos); // Kierunek światła
+    
+    // Obliczanie światła rozproszonego
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec3 diffuse = diff * light.color * vertexColor;
+
+    // Obliczanie spadku światła
+    float distance = length(light.position - FragPos);
+    float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
+    diffuse *= attenuation;
+
+    vec4 finalColor = vec4(diffuse,1.0);
+
+    // Sprawdź, czy overrideColor jest ustawiony (np. różny od zera)
+    if (overrideColor != vec4(0.0)) {
+        finalColor = overrideColor; // Nadpisz kolorem kostki światła
+    }
+	
+	
+	
+    FragColor = finalColor;
+}

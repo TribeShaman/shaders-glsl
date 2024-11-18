@@ -1,0 +1,13 @@
+﻿  main.cpp
+C:\Users\micha\OneDrive\Pulpit\Studia\SEM5\RW\Zad5\shaders_machen\main.cpp(96,11): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\micha\OneDrive\Pulpit\Studia\SEM5\RW\Zad5\shaders_machen\main.cpp(97,11): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\micha\OneDrive\Pulpit\Studia\SEM5\RW\Zad5\shaders_machen\main.cpp(101,17): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\micha\OneDrive\Pulpit\Studia\SEM5\RW\Zad5\shaders_machen\main.cpp(102,18): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\micha\OneDrive\Pulpit\Studia\SEM5\RW\Zad5\shaders_machen\main.cpp(103,10): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\micha\OneDrive\Pulpit\Studia\SEM5\RW\Zad5\shaders_machen\main.cpp(104,10): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\micha\OneDrive\Pulpit\Studia\SEM5\RW\Zad5\shaders_machen\main.cpp(117,44): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\micha\OneDrive\Pulpit\Studia\SEM5\RW\Zad5\shaders_machen\main.cpp(118,22): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\micha\OneDrive\Pulpit\Studia\SEM5\RW\Zad5\shaders_machen\main.cpp(119,44): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\micha\OneDrive\Pulpit\Studia\SEM5\RW\Zad5\shaders_machen\main.cpp(528,22): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\micha\OneDrive\Pulpit\Studia\SEM5\RW\Zad5\shaders_machen\main.cpp(550,45): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+  shaders_machen.vcxproj -> C:\Users\micha\OneDrive\Pulpit\Studia\SEM5\RW\Zad5\shaders_machen\x64\Debug\shaders_machen.exe

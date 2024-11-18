@@ -1,0 +1,21 @@
+#version 330 core // Wersja GLSL
+
+layout (location = 0) in vec3 aPos; // Dane wejściowe - pozycja wierzchołka
+layout (location = 1) in vec3 aColor; // Dane wejściowe - kolor wierzchołka
+layout (location = 2) in vec3 aNormal; // Dane wejściowe - normalne wierzchołka
+
+out vec3 vertexColor; // Dane wyjściowe - przesyłane do fragment shadera
+out vec3 FragPos; // pozycja w przestrzeni światła
+out vec3 Normal; // normalna w przestrzeni światła
+
+uniform mat4 model; // Macierz modelu
+uniform mat4 view;  // Macierz widoku
+uniform mat4 projection; // Macierz projekcji
+
+void main() 
+{
+    gl_Position = projection * view * model * vec4(aPos, 1.0); // Transformacja pozycji
+    vertexColor = aColor; // Przekazanie koloru dalej
+	FragPos = vec3(model * vec4(aPos,1.0)); // pozycja fragmentu w przestrzeni światła
+	Normal = mat3(transpose(inverse(model))) * aNormal; // Transformacja normalnych
+}

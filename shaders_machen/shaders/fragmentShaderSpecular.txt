@@ -1,0 +1,55 @@
+#version 330 core
+
+struct PointLight {
+    vec3 position;       // Pozycja światła
+    vec3 color;          // Kolor światła
+    float constant;      // Współczynnik stały spadku
+    float linear;        // Współczynnik liniowy spadku
+    float quadratic;     // Współczynnik kwadratowy spadku
+};
+
+in vec3 vertexColor; // Dane wejściowe z vertex shadera
+in vec3 FragPos;
+in vec3 Normal;
+  
+
+out vec4 FragColor;  // Dane wyjściowe - kolor fragmentu (piksela)
+
+uniform PointLight light; // Światło jako struktura
+uniform float shininess; 
+uniform vec3 ViewPos; 
+uniform float dophong;
+
+void main() {
+    vec3 lightDir = normalize(light.position - FragPos);
+	
+	vec3 norm = normalize(Normal);
+	
+	vec3 reflectDir = normalize(reflect(-lightDir, norm));
+	
+	vec3 viewDir = normalize(ViewPos - FragPos);
+	
+	 // Obliczenie światła specular
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), shininess);
+    vec3 specular = light.color * spec;
+
+    // Dodanie diffuse i ambient (jeśli potrzebne)
+    vec3 ambient = 0.1 * light.color;
+    vec3 diffuse = max(dot(norm, lightDir), 0.0) * light.color;
+	
+	vec3 result;
+	if(dophong != 0.0f)
+	{
+		result = diffuse + ambient + specular;
+	}
+	
+	else
+	{
+		result = specular; 
+	}
+	
+    
+
+    // Mnożenie przez kolor obiektu
+    FragColor = vec4(result * vertexColor, 1.0);
+}
